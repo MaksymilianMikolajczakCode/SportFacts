@@ -12,7 +12,7 @@ const User = g.model('User', {
 }).auth((rules) => {
   rules.public().read()
 })
-
+// @ts-ignore
 // @ts-ignore
 const Project = g.model('Project', {
   title: g.string().length({ min: 3 }),
