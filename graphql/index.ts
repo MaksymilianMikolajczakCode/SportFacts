@@ -1,10 +1,10 @@
-export const createProjectMutation = `
-	mutation CreateProject($input: ProjectCreateInput!) {
-		projectCreate(input: $input) {
-			project {
+export const createArticleMutation = `
+	mutation CreateArticle($input: ArticleCreateInput!) {
+		articleCreate(input: $input) {
+			article {
 				id
 				title
-				description
+				body
 				createdBy {
 					email
 					name
@@ -14,13 +14,13 @@ export const createProjectMutation = `
 	}
 `;
 
-export const updateProjectMutation = `
-	mutation UpdateProject($id: ID!, $input: ProjectUpdateInput!) {
-		projectUpdate(by: { id: $id }, input: $input) {
-			project {
+export const updateArticleMutation = `
+	mutation UpdateArticle($id: ID!, $input: ArticleUpdateInput!) {
+		articleUpdate(by: { id: $id }, input: $input) {
+			article {
 				id
 				title
-				description
+				body
 				createdBy {
 					email
 					name
@@ -30,9 +30,9 @@ export const updateProjectMutation = `
 	}
 `;
 
-export const deleteProjectMutation = `
-  mutation DeleteProject($id: ID!) {
-    projectDelete(by: { id: $id }) {
+export const deleteArticleMutation = `
+  mutation DeleteArticle($id: ID!) {
+    articleDelete(by: { id: $id }) {
       deletedId
     }
   }
@@ -44,19 +44,16 @@ export const createUserMutation = `
 			user {
 				name
 				email
-				avatarUrl
-				description
-				githubUrl
-				linkedinUrl
+				journalist
 				id
 			}
 		}
 	}
 `;
 
-export const projectsQuery = `
-  query getProjects($category: String, $endcursor: String) {
-    projectSearch(first: 8, after: $endcursor, filter: {category: {eq: $category}}) {
+export const articlesQuery = `
+  query getArticles($category: String, $endCursor: String) {
+    articleSearch(first: 8, after: $endCursor, filter: {category: {eq: $category}}) {
       pageInfo {
         hasNextPage
         hasPreviousPage
@@ -66,9 +63,7 @@ export const projectsQuery = `
       edges {
         node {
           title
-          githubUrl
-          description
-          liveSiteUrl
+          body
           id
           image
           category
@@ -84,15 +79,13 @@ export const projectsQuery = `
   }
 `;
 
-export const getProjectByIdQuery = `
-  query GetProjectById($id: ID!) {
-    project(by: { id: $id }) {
+export const getArticleByIdQuery = `
+  query GetArticleById($id: ID!) {
+    article(by: { id: $id }) {
       id
       title
-      description
+      body
       image
-      liveSiteUrl
-      githubUrl
       category
       createdBy {
         id
@@ -110,25 +103,19 @@ export const getUserQuery = `
       id
       name
       email
-      avatarUrl
-      description
-      githubUrl
-      linkedinUrl
+      journalist
     }
   }
 `;
       
-export const getProjectsOfUserQuery = `
-  query getUserProjects($id: ID!, $last: Int = 4) {
+export const getArticlesOfUserQuery = `
+  query getUserArticles($id: ID!, $last: Int = 4) {
     user(by: { id: $id }) {
       id
       name
       email
-      description
-      avatarUrl
-      githubUrl
-      linkedinUrl
-      projects(last: $last) {
+      journalist
+      articles(last: $last) {
         edges {
           node {
             id

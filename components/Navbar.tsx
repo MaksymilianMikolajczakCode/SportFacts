@@ -12,7 +12,7 @@ const Navbar = async () => {
   const session = await getCurrentUser()
 
   return (
-    <nav className='flexBetween navbar'>
+    <nav className='flexBetween navbar bg-off-green'>
       <div className='flex-1 flexStart gap-10'>
         <Link href='/'>
           <Image
@@ -20,6 +20,7 @@ const Navbar = async () => {
             width={116}
             height={43}
             alt='logo'
+            className="rounded-lg"
           />
         </Link>
         <ul className='xl:flex hidden text-small gap-7'>
@@ -36,7 +37,7 @@ const Navbar = async () => {
           <>
             <ProfileMenu session={session} />
 
-            <Link href="/create-project">
+            <Link href="/create-article">
               <Button title='Share work' />
             </Link>
           </>

@@ -1,20 +1,16 @@
 import { User, Session } from 'next-auth'
 
-export type FormState = {
+export type ArticleState = {
     title: string;
-    description: string;
     image: string;
-    liveSiteUrl: string;
-    githubUrl: string;
     category: string;
+    body: string;
 };
 
-export interface ProjectInterface {
+export interface ArticleInterface {
     title: string;
-    description: string;
+    body: string;
     image: string;
-    liveSiteUrl: string;
-    githubUrl: string;
     category: string;
     id: string;
     createdBy: {
@@ -29,12 +25,10 @@ export interface UserProfile {
     id: string;
     name: string;
     email: string;
-    description: string | null;
+    journalist: boolean;
     avatarUrl: string;
-    githubUrl: string | null;
-    linkedinUrl: string | null;
-    projects: {
-      edges: { node: ProjectInterface }[];
+    articles: {
+      edges: { node: ArticleInterface }[];
       pageInfo: {
         hasPreviousPage: boolean;
         hasNextPage: boolean;
@@ -53,11 +47,9 @@ export interface SessionInterface extends Session {
   };
 }
 
-export interface ProjectForm {
+export interface ArticleForm {
   title: string;
-  description: string;
   image: string;
-  liveSiteUrl: string;
-  githubUrl: string;
+  body: string;
   category: string;
 }
